@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ΨΜΑ 5.1 — Ίδια συνολική επίδοση, διαφορετικό προφίλ γραφής</title>
+  <style>
+    :root{
+      --ink:#24313d;
+      --muted:#5b6772;
+      --paper:#fbfaf7;
+      --panel:#ffffff;
+      --line:#c9d1d7;
+      --blue:#dfeef7;
+      --blue-strong:#356a88;
+      --sage:#e8f0e6;
+      --sage-strong:#4e7154;
+      --sand:#f4ead9;
+      --rose:#f6e5e3;
+      --warn:#805d25;
+      --ok:#2f6a48;
+      --bad:#8c3f3a;
+      --focus:#1f5f85;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--paper);
+      color:var(--ink);
+      line-height:1.55;
+    }
+    a{color:#0b63a6}
+    button, textarea{font:inherit}
+    .wrap{max-width:1060px;margin:0 auto;padding:24px 18px 48px}
+    header{
+      border:1px solid var(--line);
+      background:var(--panel);
+      padding:22px;
+      margin-bottom:18px;
+    }
+    .eyebrow{
+      font-size:.82rem;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      color:var(--blue-strong);
+      font-weight:700;
+      margin-bottom:6px;
+    }
+    h1{font-size:1.75rem;line-height:1.2;margin:0 0 10px}
+    h2{font-size:1.28rem;margin:0 0 10px}
+    h3{font-size:1.03rem;margin:0 0 8px}
+    p{margin:0 0 10px}
+    .note{
+      background:var(--sand);
+      border:1px solid #d8c9ad;
+      padding:12px 14px;
+      font-size:.95rem;
+    }
+    .progress-shell{
+      margin:16px 0 18px;
+      border:1px solid var(--line);
+      background:#fff;
+      padding:10px 12px;
+    }
+    .progress-top{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;margin-bottom:7px}
+    .progress-track{height:10px;background:#edf0f2;border:1px solid #d8dde1}
+    .progress-bar{height:100%;width:0;background:var(--blue-strong);transition:width .2s ease}
+    .stage{
+      display:none;
+      border:1px solid var(--line);
+      background:var(--panel);
+      padding:22px;
+    }
+    .stage.active{display:block}
+    .stage-tag{
+      display:inline-block;
+      padding:4px 8px;
+      border:1px solid var(--line);
+      background:var(--blue);
+      font-size:.84rem;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+    .lead{
+      font-size:1.05rem;
+      max-width:880px;
+      margin-bottom:16px;
+    }
+    .profiles{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin:16px 0;
+    }
+    .profile{
+      border:1px solid var(--line);
+      padding:16px;
+      min-height:155px;
+      background:#fff;
+    }
+    .profile.a{border-top:5px solid var(--blue-strong)}
+    .profile.b{border-top:5px solid var(--sage-strong)}
+    .profile .label{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+    .datum{
+      margin-top:8px;
+      padding:10px 11px;
+      background:#f7f8f8;
+      border-left:3px solid #aab5bd;
+    }
+    .question{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+    }
+    .options{
+      display:grid;
+      gap:8px;
+      margin:10px 0 6px;
+    }
+    .option{
+      text-align:left;
+      padding:11px 12px;
+      border:1px solid #aeb9c0;
+      background:#fff;
+      cursor:pointer;
+    }
+    .option:hover{background:#f4f7f8}
+    .option:focus-visible,.nav:focus-visible,textarea:focus-visible{
+      outline:3px solid #9bc3dc;
+      outline-offset:2px;
+    }
+    .option.correct{border-color:var(--ok);background:#edf7f0}
+    .option.wrong{border-color:var(--bad);background:#fbefee}
+    .feedback{
+      min-height:46px;
+      margin-top:10px;
+      padding:10px 12px;
+      border:1px solid transparent;
+    }
+    .feedback.ok{border-color:#9dc2aa;background:#edf7f0;color:#244f36}
+    .feedback.no{border-color:#d5aaa6;background:#fbefee;color:#713631}
+    .navrow{
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:18px;
+      flex-wrap:wrap;
+    }
+    .nav{
+      border:1px solid var(--blue-strong);
+      background:var(--blue-strong);
+      color:#fff;
+      padding:10px 15px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .nav.secondary{
+      background:#fff;
+      color:var(--blue-strong);
+    }
+    .nav:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+    .evidence-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin:14px 0;
+    }
+    .evidence{
+      border:1px solid var(--line);
+      padding:12px;
+      background:#fff;
+      font-size:.94rem;
+    }
+    .evidence strong{display:block;margin-bottom:5px}
+    .synthesis{
+      background:var(--blue);
+      border:1px solid #b9d1df;
+      padding:14px;
+      margin-top:14px;
+    }
+    textarea{
+      width:100%;
+      min-height:140px;
+      border:1px solid #9eabb3;
+      padding:12px;
+      background:#fff;
+      resize:vertical;
+    }
+    .checklist{
+      display:grid;
+      gap:8px;
+      margin:12px 0;
+    }
+    .checklist label{
+      border:1px solid var(--line);
+      background:#fff;
+      padding:9px 10px;
+    }
+    .model{
+      display:none;
+      border:1px solid #b6c6ce;
+      background:#f7fafb;
+      padding:14px;
+      margin-top:12px;
+    }
+    .model.show{display:block}
+    .final-name{
+      font-weight:700;
+      font-size:1.08rem;
+    }
+    footer{
+      margin-top:18px;
+      font-size:.88rem;
+      color:var(--muted);
+      text-align:center;
+    }
+    @media (max-width:780px){
+      .profiles,.evidence-grid{grid-template-columns:1fr}
+      h1{font-size:1.45rem}
+      .stage,header{padding:17px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{scroll-behavior:auto!important;transition:none!important}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Κεφάλαιο 5 · Ψηφιακό Μαθησιακό Αντικείμενο 5.1</div>
+    <h1>ΨΜΑ 5.1 — Ίδια συνολική επίδοση, διαφορετικό προφίλ γραφής</h1>
+    <p>Στόχος είναι να μετακινηθείς από μια συνολική βαθμολογία προς μια λειτουργική περιγραφή της γραφής, αξιοποιώντας δεδομένα που αποκαλύπτονται σταδιακά.</p>
+    <div class="note"><strong>Σημαντικό:</strong> Τα δεδομένα είναι κατασκευασμένα για εκπαιδευτική χρήση και δεν αποτελούν πραγματικό διαγνωστικό πρωτόκολλο. Σε κάθε στάδιο επιλέγεις την ασφαλέστερη ερμηνεία με βάση όσα γνωρίζεις μέχρι εκείνη τη στιγμή.</div>
+  </header>
+
+  <div class="progress-shell" aria-label="Πρόοδος">
+    <div class="progress-top"><span id="progressText">Βήμα 1 από 7</span><span id="scoreText">Τεκμηριωμένες επιλογές: 0</span></div>
+    <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+  </div>
+
+  <main>
+    <section class="stage active" data-stage="0">
+      <div class="stage-tag">1 · Κοινή αφετηρία</div>
+      <h2>Μια συνολική βαθμολογία</h2>
+      <p class="lead">Δύο παιδιά ολοκληρώνουν την ίδια σχολική δραστηριότητα παραγωγής κειμένου. Η συνολική αξιολόγηση του τελικού γραπτού είναι παρόμοια και στις δύο περιπτώσεις.</p>
+      <div class="profiles">
+        <article class="profile a"><div class="label">Προφίλ Α</div><div class="datum"><strong>Συνολική επίδοση:</strong> παρόμοια χαμηλή βαθμολογία</div><p>Δεν έχεις ακόμη άλλες πληροφορίες.</p></article>
+        <article class="profile b"><div class="label">Προφίλ Β</div><div class="datum"><strong>Συνολική επίδοση:</strong> παρόμοια χαμηλή βαθμολογία</div><p>Δεν έχεις ακόμη άλλες πληροφορίες.</p></article>
+      </div>
+      <div class="question" data-q="0">
+        <h3>Τι μπορείς να συμπεράνεις με ασφάλεια;</h3>
+        <div class="options">
+          <button class="option" data-correct="false">Τα δύο παιδιά έχουν την ίδια δυσκολία στη γραφή.</button>
+          <button class="option" data-correct="true">Γνωρίζω ότι το τελικό αποτέλεσμα είναι παρόμοιο, αλλά όχι ακόμη πώς παράχθηκε.</button>
+          <button class="option" data-correct="false">Η χαμηλή συνολική βαθμολογία αρκεί για να προσδιοριστεί συγκεκριμένη μαθησιακή δυσκολία.</button>
+        </div>
+        <div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="navrow"><span></span><button class="nav next" disabled>Αποκάλυψε το επόμενο στοιχείο</button></div>
+    </section>
+
+    <section class="stage" data-stage="1">
+      <div class="stage-tag">2 · Ορθογραφία και χειρόγραφη παραγωγή</div>
+      <h2>Το ίδιο αποτέλεσμα αρχίζει να διαχωρίζεται</h2>
+      <div class="profiles">
+        <article class="profile a">
+          <div class="label">Προφίλ Α</div>
+          <div class="datum"><strong>Χειρόγραφο:</strong> κατά κανόνα αναγνώσιμο.</div>
+          <div class="datum"><strong>Παρατήρηση:</strong> συχνές παύσεις, επιστροφές σε ήδη γραμμένες λέξεις και διορθώσεις ορθογραφίας.</div>
+        </article>
+        <article class="profile b">
+          <div class="label">Προφίλ Β</div>
+          <div class="datum"><strong>Χειρόγραφο:</strong> αναγνώσιμο, με μεγαλύτερη αμεσότητα στην παραγωγή λέξεων και προτάσεων.</div>
+          <div class="datum"><strong>Παρατήρηση:</strong> η ορθογραφία δεν φαίνεται να αποτελεί την κύρια πηγή επιβάρυνσης στο συγκεκριμένο έργο.</div>
+        </article>
+      </div>
+      <div class="question" data-q="1">
+        <h3>Ποια ερμηνεία είναι πληρέστερη;</h3>
+        <div class="options">
+          <button class="option" data-correct="true">Στο Προφίλ Α το λειτουργικό κόστος φαίνεται να συγκεντρώνεται περισσότερο στον έλεγχο και στην παραγωγή της γραπτής μορφής.</button>
+          <button class="option" data-correct="false">Το Προφίλ Α έχει δυσγραφία, επειδή σταματά συχνά όταν γράφει.</button>
+          <button class="option" data-correct="false">Το Προφίλ Β δεν έχει δυσκολία στη γραφή, αφού το χειρόγραφό του είναι αναγνώσιμο.</button>
+        </div>
+        <div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="navrow"><button class="nav secondary prev">Προηγούμενο</button><button class="nav next" disabled>Συνέχισε</button></div>
+    </section>
+
+    <section class="stage" data-stage="2">
+      <div class="stage-tag">3 · Χρόνος και κόστος</div>
+      <h2>Πώς παράγεται το γραπτό;</h2>
+      <div class="profiles">
+        <article class="profile a">
+          <div class="label">Προφίλ Α</div>
+          <div class="datum"><strong>Μεγαλύτερο έργο:</strong> ο ρυθμός μειώνεται αισθητά όσο αυξάνεται η έκταση.</div>
+          <div class="datum"><strong>Κόστος:</strong> περισσότερος χρόνος και προσπάθεια· το τελικό κείμενο μένει μικρότερο από όσα το παιδί δηλώνει ότι ήθελε να γράψει.</div>
+        </article>
+        <article class="profile b">
+          <div class="label">Προφίλ Β</div>
+          <div class="datum"><strong>Μεγαλύτερο έργο:</strong> η φυσική εκτέλεση παραμένει σχετικά άμεση.</div>
+          <div class="datum"><strong>Κόστος:</strong> εμφανίζεται κυρίως όταν απαιτούνται επιλογή, ανάπτυξη και οργάνωση περισσότερων πληροφοριών.</div>
+        </article>
+      </div>
+      <div class="question" data-q="2">
+        <h3>Τι προσθέτει η πληροφορία για τον χρόνο;</h3>
+        <div class="options">
+          <button class="option" data-correct="false">Μεγαλύτερος χρόνος σημαίνει μεγαλύτερη συνολική βαρύτητα δυσκολίας.</button>
+          <button class="option" data-correct="true">Ο χρόνος δείχνει με ποιο κόστος επιτυγχάνεται η επίδοση και βοηθά να εντοπιστεί πού συγκεντρώνεται η επιβάρυνση.</button>
+          <button class="option" data-correct="false">Ο χρόνος δεν έχει αξία, εφόσον το τελικό προϊόν βαθμολογείται το ίδιο.</button>
+        </div>
+        <div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="navrow"><button class="nav secondary prev">Προηγούμενο</button><button class="nav next" disabled>Συνέχισε</button></div>
+    </section>
+
+    <section class="stage" data-stage="3">
+      <div class="stage-tag">4 · Προφορική και γραπτή παραγωγή</div>
+      <h2>Τι αλλάζει όταν μειώνονται οι απαιτήσεις της γραπτής μορφής;</h2>
+      <div class="profiles">
+        <article class="profile a">
+          <div class="label">Προφίλ Α</div>
+          <div class="datum"><strong>Προφορικά:</strong> αναπτύσσει περισσότερες ιδέες και τις εκφράζει με μεγαλύτερη άνεση από ό,τι στο γραπτό.</div>
+        </article>
+        <article class="profile b">
+          <div class="label">Προφίλ Β</div>
+          <div class="datum"><strong>Διαθέσιμο δεδομένο:</strong> η κύρια δυσκολία παραμένει εμφανής όταν το έργο απαιτεί μεγαλύτερη επιλογή και οργάνωση περιεχομένου. Δεν έχουμε ακόμη αρκετά στοιχεία για να αποδώσουμε τη διαφορά σε έναν μοναδικό μηχανισμό.</div>
+        </article>
+      </div>
+      <div class="question" data-q="3">
+        <h3>Πώς χρησιμοποιούμε τη σύγκριση προφορικού–γραπτού;</h3>
+        <div class="options">
+          <button class="option" data-correct="false">Αν η προφορική παραγωγή είναι καλύτερη, αποδεικνύεται ειδική διαταραχή της γραφής.</button>
+          <button class="option" data-correct="true">Η σύγκριση φωτίζει ποιες ιδέες και γλωσσικές δυνατότητες είναι διαθέσιμες όταν μειώνονται ορισμένες απαιτήσεις της γραφής, χωρίς να αποτελεί από μόνη της διάγνωση.</button>
+          <button class="option" data-correct="false">Η προφορική παραγωγή δεν πρέπει να συνεκτιμάται επειδή είναι διαφορετική δεξιότητα.</button>
+        </div>
+        <div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="navrow"><button class="nav secondary prev">Προηγούμενο</button><button class="nav next" disabled>Συνέχισε</button></div>
+    </section>
+
+    <section class="stage" data-stage="4">
+      <div class="stage-tag">5 · Αλλαγή μέσου</div>
+      <h2>Χειρόγραφη γραφή και πληκτρολόγηση</h2>
+      <div class="profiles">
+        <article class="profile a">
+          <div class="label">Προφίλ Α</div>
+          <div class="datum"><strong>Με πληκτρολόγιο:</strong> αυξάνεται ο ρυθμός και αποτυπώνονται περισσότερες ιδέες.</div>
+          <div class="datum"><strong>Παραμένει:</strong> οι ορθογραφικοί δισταγμοί δεν εξαφανίζονται.</div>
+        </article>
+        <article class="profile b">
+          <div class="label">Προφίλ Β</div>
+          <div class="datum"><strong>Με πληκτρολόγιο:</strong> η φυσική εκτέλεση γίνεται ευκολότερη.</div>
+          <div class="datum"><strong>Παραμένει:</strong> οι δυσκολίες στην επιλογή, ανάπτυξη και οργάνωση του περιεχομένου μεταβάλλονται λίγο.</div>
+        </article>
+      </div>
+      <div class="question" data-q="4">
+        <h3>Ποια είναι η ασφαλέστερη ερμηνεία;</h3>
+        <div class="options">
+          <button class="option" data-correct="true">Η αλλαγή μέσου λειτουργεί ως σύγκριση συνθηκών: στο Προφίλ Α αποκαλύπτει μεγαλύτερη επίδραση των απαιτήσεων της χειρόγραφης παραγωγής, ενώ στο Β στρέφει την προσοχή περισσότερο στο περιεχόμενο.</button>
+          <button class="option" data-correct="false">Η πληκτρολόγηση είναι γενικά καλύτερο μέσο αξιολόγησης της γραφής.</button>
+          <button class="option" data-correct="false">Η βελτίωση του Προφίλ Α με πληκτρολόγηση αποδεικνύει δυσγραφία.</button>
+        </div>
+        <div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="navrow"><button class="nav secondary prev">Προηγούμενο</button><button class="nav next" disabled>Συνέχισε</button></div>
+    </section>
+
+    <section class="stage" data-stage="5">
+      <div class="stage-tag">6 · Αύξηση απαιτήσεων και αναθεώρηση</div>
+      <h2>Όταν το έργο γίνεται πιο σύνθετο</h2>
+      <p class="lead">Στο ΨΜΑ προστίθενται δύο κατασκευασμένα δεδομένα, ώστε να εξεταστεί η λογική της λειτουργικής περιγραφής και όχι να προσομοιωθεί πραγματική διάγνωση.</p>
+      <div class="profiles">
+        <article class="profile a">
+          <div class="label">Προφίλ Α</div>
+          <div class="datum"><strong>Αναθεώρηση:</strong> επιστρέφει συχνά σε λέξεις και επιφανειακές διορθώσεις· η έκταση του περιεχομένου αλλάζει λίγο.</div>
+          <div class="datum"><strong>Με αύξηση έκτασης:</strong> αυξάνονται οι παύσεις και η κόπωση.</div>
+        </article>
+        <article class="profile b">
+          <div class="label">Προφίλ Β</div>
+          <div class="datum"><strong>Αναθεώρηση:</strong> εντοπίζει ορισμένες επιφανειακές αλλαγές, αλλά δυσκολεύεται να αναδιοργανώσει βασικές ιδέες χωρίς υποστήριξη.</div>
+          <div class="datum"><strong>Με αύξηση έκτασης:</strong> αυξάνονται οι επαναλήψεις και τα κενά στην ανάπτυξη του θέματος.</div>
+        </article>
+      </div>
+      <div class="question" data-q="5">
+        <h3>Ποιο συμπέρασμα αποφεύγει την υπερερμηνεία;</h3>
+        <div class="options">
+          <button class="option" data-correct="false">Η συμπεριφορά κατά την αναθεώρηση αποκαλύπτει την αιτία της δυσκολίας.</button>
+          <button class="option" data-correct="true">Η αναθεώρηση και η αύξηση των απαιτήσεων προσθέτουν πληροφορία για το πού και πότε εμφανίζεται το κόστος, αλλά χρειάζονται σύνθεση με τα υπόλοιπα δεδομένα.</button>
+          <button class="option" data-correct="false">Οι επιφανειακές διορθώσεις έχουν την ίδια σημασία και στα δύο προφίλ.</button>
+        </div>
+        <div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="navrow"><button class="nav secondary prev">Προηγούμενο</button><button class="nav next" disabled>Πέρασε στη σύνθεση</button></div>
+    </section>
+
+    <section class="stage" data-stage="6">
+      <div class="stage-tag">7 · Σύνθεση λειτουργικού προφίλ</div>
+      <h2>Τώρα έχεις περισσότερα από ένα σκορ</h2>
+      <div class="evidence-grid">
+        <div class="evidence"><strong>Ορθογραφία</strong>Παύσεις, έλεγχος, σταθερότητα και είδος λαθών.</div>
+        <div class="evidence"><strong>Μέσο γραφής</strong>Τι αλλάζει από χειρόγραφο σε πληκτρολόγηση;</div>
+        <div class="evidence"><strong>Προφορική σύγκριση</strong>Πόσο διαθέσιμες είναι οι ιδέες όταν μειώνεται η γραπτή απαίτηση;</div>
+        <div class="evidence"><strong>Χρόνος και προσπάθεια</strong>Με ποιο κόστος επιτυγχάνεται το αποτέλεσμα;</div>
+        <div class="evidence"><strong>Περιεχόμενο</strong>Πώς επιλέγονται, αναπτύσσονται και οργανώνονται οι πληροφορίες;</div>
+        <div class="evidence"><strong>Αναθεώρηση</strong>Τι αλλάζει όταν το παιδί επιστρέφει στο κείμενό του;</div>
+      </div>
+
+      <div class="synthesis">
+        <p><span class="final-name">Προφίλ Α = Μαρίνα.</span> Η εικόνα δείχνει μεγαλύτερο λειτουργικό κόστος στην παραγωγή και στον έλεγχο της γραπτής μορφής. Η προφορική παραγωγή και η πληκτρολόγηση αναδεικνύουν περισσότερες διαθέσιμες ιδέες, χωρίς να εξαφανίζουν τους ορθογραφικούς δισταγμούς.</p>
+        <p><span class="final-name">Προφίλ Β = Αντώνης.</span> Η χειρόγραφη εκτέλεση είναι σχετικά άμεση και η αλλαγή μέσου μεταβάλλει λιγότερο το αποτέλεσμα. Η επιβάρυνση γίνεται περισσότερο εμφανής όταν αυξάνονται οι απαιτήσεις επιλογής, ανάπτυξης και οργάνωσης του περιεχομένου.</p>
+        <p><strong>Κοινή αρχή:</strong> η λειτουργική περιγραφή δεν ισοδυναμεί με διάγνωση. Δείχνει ποια δεδομένα χρειάζονται σύνθεση και προς τα πού μπορεί να κατευθυνθεί η εκπαιδευτική διερεύνηση.</p>
+      </div>
+
+      <div class="question">
+        <h3>Δική σου σύνθεση</h3>
+        <p>Γράψε 80–120 λέξεις: ποια είναι η βασική λειτουργική διαφορά των δύο προφίλ και ποια δεδομένα σε οδηγούν σε αυτήν;</p>
+        <textarea id="reflection" aria-label="Δική σου σύνθεση"></textarea>
+        <div class="checklist">
+          <label><input type="checkbox" /> Αναφέρω τουλάχιστον τρεις πηγές πληροφορίας.</label>
+          <label><input type="checkbox" /> Περιγράφω πού συγκεντρώνεται το λειτουργικό κόστος σε κάθε προφίλ.</label>
+          <label><input type="checkbox" /> Δεν χρησιμοποιώ διαγνωστική ετικέτα ως συμπέρασμα.</label>
+          <label><input type="checkbox" /> Διακρίνω το τελικό προϊόν από τη διαδικασία παραγωγής.</label>
+        </div>
+        <button id="showModel" class="nav secondary">Δες ένα υπόδειγμα σύνθεσης</button>
+        <div id="model" class="model">
+          <strong>Υπόδειγμα:</strong>
+          <p>Παρότι η Μαρίνα και ο Αντώνης μπορεί να έχουν παρόμοια συνολική γραπτή επίδοση, η λειτουργική εικόνα τους διαφέρει. Στη Μαρίνα, οι συχνές ορθογραφικές παύσεις, ο αυξημένος χρόνος και η μεγαλύτερη ποσότητα κειμένου με πληκτρολόγηση δείχνουν ότι σημαντικό μέρος του κόστους συνδέεται με την παραγωγή και τον έλεγχο της γραπτής μορφής. Στον Αντώνη, η χειρόγραφη εκτέλεση είναι σχετικά άμεση και η αλλαγή μέσου επηρεάζει λιγότερο το αποτέλεσμα, ενώ οι δυσκολίες αυξάνονται όταν απαιτείται επιλογή, ανάπτυξη και οργάνωση περιεχομένου. Τα δεδομένα αυτά συνθέτουν διαφορετικά λειτουργικά προφίλ χωρίς να αποτελούν από μόνα τους διάγνωση.</p>
+        </div>
+      </div>
+      <div class="navrow"><button class="nav secondary prev">Προηγούμενο</button><button id="restart" class="nav">Ξεκίνα ξανά</button></div>
+    </section>
+  </main>
+
+  <footer>
+    ΨΜΑ 5.1 · Κεφάλαιο 5 «Γραφή και δυσκολίες στη γραφή» · Εκπαιδευτικό σενάριο λειτουργικής ερμηνείας
+  </footer>
+</div>
+
+<script>
+(function(){
+  const stages = [...document.querySelectorAll('.stage')];
+  const progressBar = document.getElementById('progressBar');
+  const progressText = document.getElementById('progressText');
+  const scoreText = document.getElementById('scoreText');
+  let current = 0;
+  const awarded = new Set();
+
+  function showStage(i){
+    current = Math.max(0, Math.min(stages.length-1, i));
+    stages.forEach((s,idx)=>s.classList.toggle('active', idx===current));
+    const pct = ((current+1)/stages.length)*100;
+    progressBar.style.width = pct + '%';
+    progressText.textContent = `Βήμα ${current+1} από ${stages.length}`;
+    window.scrollTo({top:0, behavior:'smooth'});
+    const heading = stages[current].querySelector('h2');
+    if(heading){ heading.setAttribute('tabindex','-1'); heading.focus({preventScroll:true}); }
+  }
+
+  document.querySelectorAll('.question[data-q]').forEach(q=>{
+    const feedback = q.querySelector('.feedback');
+    const options = [...q.querySelectorAll('.option')];
+    options.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        options.forEach(b=>b.classList.remove('correct','wrong'));
+        const correct = btn.dataset.correct === 'true';
+        btn.classList.add(correct ? 'correct' : 'wrong');
+        if(correct){
+          feedback.className='feedback ok';
+          feedback.textContent='Σωστά. Η ερμηνεία μένει μέσα στα όρια των διαθέσιμων δεδομένων και προσθέτει λειτουργική πληροφορία χωρίς να προχωρά σε διάγνωση.';
+          const stage = btn.closest('.stage');
+          stage.querySelector('.next').disabled = false;
+          const qid = q.dataset.q;
+          if(!awarded.has(qid)){ awarded.add(qid); scoreText.textContent=`Τεκμηριωμένες επιλογές: ${awarded.size}`; }
+        }else{
+          feedback.className='feedback no';
+          feedback.textContent='Χρειάζεται πιο προσεκτική ερμηνεία. Το συγκεκριμένο δεδομένο δεν επαρκεί από μόνο του για αυτό το συμπέρασμα. Δοκίμασε ξανά.';
+        }
+      });
+    });
+  });
+
+  document.querySelectorAll('.next').forEach(btn=>btn.addEventListener('click',()=>showStage(current+1)));
+  document.querySelectorAll('.prev').forEach(btn=>btn.addEventListener('click',()=>showStage(current-1)));
+
+  document.getElementById('showModel').addEventListener('click',()=>{
+    document.getElementById('model').classList.toggle('show');
+  });
+
+  document.getElementById('restart').addEventListener('click',()=>{
+    awarded.clear();
+    scoreText.textContent='Τεκμηριωμένες επιλογές: 0';
+    document.querySelectorAll('.option').forEach(b=>b.classList.remove('correct','wrong'));
+    document.querySelectorAll('.feedback').forEach(f=>{f.className='feedback';f.textContent='';});
+    document.querySelectorAll('.next').forEach(b=>b.disabled=true);
+    document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
+    document.getElementById('reflection').value='';
+    document.getElementById('model').classList.remove('show');
+    showStage(0);
+  });
+
+  showStage(0);
+})();
+</script>
+</body>
+</html>
