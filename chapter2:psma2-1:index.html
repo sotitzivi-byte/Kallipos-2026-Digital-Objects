@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ΨΜΑ 2.1 — Από τα δεδομένα στη διαγνωστική σύνθεση</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:980px;margin:0 auto;padding:28px;line-height:1.55;background:#fafafa;color:#171717}main{background:white;padding:28px;border:1px solid #ddd;border-radius:12px}h1{font-size:1.7rem;margin-top:0}.case{border:1px solid #ccc;border-radius:10px;padding:18px;margin:18px 0}.data{background:#f4f4f4;padding:12px;border-radius:8px}label{display:block;margin:.55rem 0}.feedback{margin-top:10px;padding:10px;background:#f2f2f2;border-radius:8px}.actions{margin-top:18px}button{font:inherit;padding:10px 14px;border:1px solid #555;border-radius:8px;background:white;cursor:pointer}button:hover{background:#eee}.summary{padding:16px;border-left:4px solid #555;background:#f5f5f5}
+</style></head><body><main>
+<h1>ΨΜΑ 2.1 — Από τα δεδομένα στη διαγνωστική σύνθεση</h1>
+<p>Δύο παιδιά μπορεί να έχουν παρόμοια χαμηλή επίδοση σε μία μέτρηση και να χρειάζονται διαφορετική ερμηνεία. Για κάθε περίπτωση, επιλέξτε την περισσότερο τεκμηριωμένη επόμενη κίνηση.</p>
+<section class="case"><h2>Περίπτωση Α</h2><div class="data"><p><strong>Μαρίνα, Δ΄ Δημοτικού.</strong> Πολύ χαμηλή επίδοση στην ανάγνωση λέξεων. Παρόμοια εικόνα στα σχολικά έργα τα τελευταία δύο χρόνια. Συστηματική φοίτηση, τεκμηριωμένη πρόσθετη διδασκαλία και περιορισμένη πρόοδος. Δεν υπάρχουν ενδείξεις ότι η δυσκολία εξηγείται πληρέστερα από περιορισμένη γνώση της γλώσσας διδασκαλίας.</p></div>
+<label><input type="radio" name="a" value="1"> Η χαμηλή βαθμολογία αρκεί μόνη της για διάγνωση.</label>
+<label><input type="radio" name="a" value="2"> Τα δεδομένα συγκλίνουν και δικαιολογούν συστηματική διαγνωστική διερεύνηση με υψηλό βάρος στην άμεση ακαδημαϊκή δυσκολία και στην πορεία της.</label>
+<label><input type="radio" name="a" value="3"> Χρειάζεται να περιμένουμε ακόμη ένα σχολικό έτος πριν δοθεί οποιαδήποτε υποστήριξη.</label><div id="fa" class="feedback" aria-live="polite"></div></section>
+<section class="case"><h2>Περίπτωση Β</h2><div class="data"><p><strong>Αντώνης, Δ΄ Δημοτικού.</strong> Παρόμοια χαμηλή επίδοση στην ίδια δοκιμασία. Έχει όμως αλλάξει σχολείο δύο φορές, είχε παρατεταμένες απουσίες και άρχισε να διδάσκεται συστηματικά στην ελληνική γλώσσα σχετικά πρόσφατα. Δεν υπάρχει ακόμη επαρκές ιστορικό συστηματικής υποστήριξης.</p></div>
+<label><input type="radio" name="b" value="1"> Η ίδια χαμηλή βαθμολογία πρέπει να έχει ακριβώς την ίδια διαγνωστική ερμηνεία με την Περίπτωση Α.</label>
+<label><input type="radio" name="b" value="2"> Χρειάζεται να συνεκτιμηθούν οι ευκαιρίες μάθησης, η γλωσσική και εκπαιδευτική πορεία και η ανταπόκριση σε κατάλληλη διδασκαλία πριν ενισχυθεί μια συγκεκριμένη διαγνωστική υπόθεση.</label>
+<label><input type="radio" name="b" value="3"> Η χαμηλή επίδοση πρέπει να αποδοθεί αυτομάτως στην αλλαγή σχολείου.</label><div id="fb" class="feedback" aria-live="polite"></div></section>
+<section class="case"><h2>Κοινό ερώτημα</h2><p>Ποια αρχή συνδέει καλύτερα τις δύο περιπτώσεις;</p>
+<label><input type="radio" name="c" value="1"> Η διαγνωστική απόφαση είναι απλή εφαρμογή ενός cut-off.</label>
+<label><input type="radio" name="c" value="2"> Η ίδια βαθμολογία αποκτά διαφορετικό νόημα όταν αλλάζουν η μαθησιακή πορεία, οι ευκαιρίες μάθησης και η σύγκλιση των διαθέσιμων δεδομένων.</label>
+<label><input type="radio" name="c" value="3"> Όσο περισσότερα τεστ χορηγηθούν, τόσο ασφαλέστερη είναι πάντοτε η διάγνωση.</label><div id="fc" class="feedback" aria-live="polite"></div></section>
+<div class="actions"><button id="check">Έλεγχος</button> <button id="reset">Επαναφορά</button></div><div id="score" class="feedback" aria-live="polite"></div>
+<h2>Τι κρατάμε</h2><div class="summary"><ul><li>Η χαμηλή επίδοση είναι βασικό τεκμήριο, αλλά η ερμηνεία της χρειάζεται το ιστορικό και την πορεία της μάθησης.</li><li>Οι πολλαπλές πηγές δεν λειτουργούν ως μηχανικό άθροισμα. Εξετάζεται πόσο σχετίζονται με το αξιολογικό ερώτημα και πόσο συγκλίνουν.</li><li>Η εκπαιδευτική υποστήριξη μπορεί να αρχίζει πριν ολοκληρωθεί η διαγνωστική διαδικασία.</li></ul></div>
+</main><script>
+const ans={a:'2',b:'2',c:'2'};document.getElementById('check').onclick=()=>{let n=0;for(const k of Object.keys(ans)){const x=document.querySelector(`input[name=${k}]:checked`),f=document.getElementById('f'+k);if(x&&x.value===ans[k]){n++;f.textContent='Σωστά.'}else{f.textContent='Ξαναδείτε ποια δεδομένα προσθέτουν πληροφορία στη συγκεκριμένη ερμηνεία.'}}document.getElementById('score').textContent=`Σωστές απαντήσεις: ${n} / 3`};document.getElementById('reset').onclick=()=>{document.querySelectorAll('input').forEach(x=>x.checked=false);['fa','fb','fc','score'].forEach(id=>document.getElementById(id).textContent='')};
+</script></body></html>
