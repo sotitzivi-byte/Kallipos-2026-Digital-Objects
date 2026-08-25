@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ΨΜΑ 1.1 — Η αναπτυξιακή πορεία της δυσλεξίας</title>
+  <style>
+    :root{
+      --ink:#24313d;--muted:#5b6772;--paper:#fbfaf7;--panel:#fff;--line:#c9d1d7;
+      --blue:#dfeef7;--blue-strong:#356a88;--sage:#e8f0e6;--sage-strong:#4e7154;
+      --sand:#f4ead9;--rose:#f6e5e3;--focus:#1f5f85
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55}
+    .wrap{max-width:1060px;margin:0 auto;padding:24px 18px 48px}
+    header,.panel{border:1px solid var(--line);background:var(--panel);padding:22px;margin-bottom:18px}
+    .eyebrow{font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-strong);font-weight:700;margin-bottom:6px}
+    h1{font-size:1.75rem;line-height:1.2;margin:0 0 10px}
+    h2{font-size:1.28rem;margin:0 0 10px}
+    h3{font-size:1.05rem;margin:0 0 8px}
+    p{margin:0 0 10px}
+    .note{background:var(--sand);border:1px solid #d8c9ad;padding:12px 14px;font-size:.95rem}
+    .warning{background:var(--rose);border:1px solid #d8b9b5;padding:12px 14px;font-size:.95rem}
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+    .phase-btn{border:1px solid #aeb9c0;background:#fff;padding:12px 10px;cursor:pointer;text-align:left;min-height:88px}
+    .phase-btn strong{display:block;margin-bottom:4px}
+    .phase-btn.active{background:var(--blue);border-color:var(--blue-strong)}
+    .phase-btn:focus-visible,.toggle button:focus-visible{outline:3px solid #9bc3dc;outline-offset:2px}
+    .phase{display:none}
+    .phase.active{display:block}
+    .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:14px 0}
+    .card{border:1px solid var(--line);padding:14px;background:#fff}
+    .card h3{color:var(--blue-strong)}
+    ul{margin:8px 0 0 20px;padding:0}
+    .key{background:var(--sage);border-left:5px solid var(--sage-strong);padding:12px 14px;margin-top:14px}
+    .toggle{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+    .toggle button{border:1px solid var(--blue-strong);background:#fff;color:var(--blue-strong);padding:9px 12px;cursor:pointer;font-weight:700}
+    .toggle button.active{background:var(--blue-strong);color:white}
+    .lens{display:none;border:1px solid var(--line);padding:14px;background:#fff}
+    .lens.active{display:block}
+    footer{margin-top:20px;font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+    .refs li{margin-bottom:5px}
+    @media(max-width:820px){.timeline{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+    @media(max-width:520px){.timeline{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Ψηφιακό Μαθησιακό Αντικείμενο 1.1</div>
+  <h1>Η αναπτυξιακή πορεία της δυσλεξίας</h1>
+  <p>Διερεύνησε πώς μπορεί να μεταβάλλεται η έκφραση της δυσλεξίας από τις πρώιμες ενδείξεις έως την ενήλικη ζωή, λαμβάνοντας υπόψη την ηλικία, τη διδασκαλία, την εμπειρία, τις στρατηγικές και τις απαιτήσεις του περιβάλλοντος.</p>
+</header>
+
+<div class="note">
+  <strong>Κεντρική ιδέα</strong><br>
+  Οι δυσκολίες μπορεί να συνεχίζονται στον χρόνο, ενώ ο τρόπος με τον οποίο εκδηλώνονται μπορεί να αλλάζει. Η βελτίωση σε μια δεξιότητα δεν σημαίνει ότι όλες οι δυσκολίες έχουν εξαφανιστεί.
+</div>
+
+<div class="timeline" role="tablist" aria-label="Αναπτυξιακές φάσεις">
+  <button class="phase-btn active" data-phase="p0" role="tab" aria-selected="true"><strong>Πριν από την τυπική ανάγνωση</strong>Πρώιμες ενδείξεις και αυξημένος κίνδυνος</button>
+  <button class="phase-btn" data-phase="p1" role="tab" aria-selected="false"><strong>Πρώτες τάξεις Δημοτικού</strong>Αρχική κατάκτηση ανάγνωσης και ορθογραφίας</button>
+  <button class="phase-btn" data-phase="p2" role="tab" aria-selected="false"><strong>Μεγαλύτερες τάξεις και εφηβεία</strong>Μεταβολή της εξωτερικής εικόνας</button>
+  <button class="phase-btn" data-phase="p3" role="tab" aria-selected="false"><strong>Ενήλικη ζωή</strong>Συνέχιση δυσκολιών, στρατηγικές και αντιστάθμιση</button>
+</div>
+
+<div id="p0" class="phase active panel" role="tabpanel">
+  <h2>Πριν από τη συστηματική διδασκαλία της ανάγνωσης</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Τι μπορεί να παρατηρείται</h3>
+      <ul>
+        <li>οικογενειακό ιστορικό δυσλεξίας ή επίμονων αναγνωστικών δυσκολιών</li>
+        <li>δυσκολίες σε δεξιότητες αναδυόμενου γραμματισμού</li>
+        <li>διαφοροποιήσεις στη φωνολογική επίγνωση, στη γνώση γραμμάτων ή στην ταχεία κατονομασία</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Τι χρειάζεται προσοχή στην ερμηνεία</h3>
+      <ul>
+        <li>οι πρώιμοι δείκτες δεν αποτελούν από μόνοι τους διάγνωση</li>
+        <li>δεν υπάρχει ένας υποχρεωτικός κατάλογος «προσυμπτωμάτων»</li>
+        <li>η απουσία ενός δείκτη δεν αποκλείει μεταγενέστερη δυσκολία</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Τι έχει εκπαιδευτική αξία</h3>
+      <ul>
+        <li>παρακολούθηση της πορείας</li>
+        <li>έγκαιρη ποιοτική διδασκαλία και υποστήριξη</li>
+        <li>σύνθεση πολλαπλών πηγών πληροφορίας</li>
+      </ul>
+    </div>
+  </div>
+  <div class="key"><strong>Ερμηνευτικό κλειδί</strong><br>Πριν από τη συστηματική ανάγνωση μιλάμε για αυξημένο κίνδυνο και αναπτυξιακές ενδείξεις. Η ατομική πορεία δεν μπορεί να προβλεφθεί με ασφάλεια από έναν μόνο πρώιμο δείκτη.</div>
+</div>
+
+<div id="p1" class="phase panel" role="tabpanel">
+  <h2>Πρώτες τάξεις Δημοτικού</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Τι μπορεί να είναι πιο εμφανές</h3>
+      <ul>
+        <li>δυσκολίες στην ανάγνωση λέξεων</li>
+        <li>χαμηλότερη ακρίβεια ή και βραδύτερη ταχύτητα</li>
+        <li>δυσκολίες στην αρχική ορθογραφική μάθηση</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Τι μπορεί να αλλάζει</h3>
+      <ul>
+        <li>η ακρίβεια μπορεί να βελτιώνεται με τη διδασκαλία και την εμπειρία</li>
+        <li>η βραδύτητα ή η αυξημένη προσπάθεια μπορεί να παραμένουν</li>
+        <li>η ορθογραφική δυσκολία μπορεί να γίνεται περισσότερο εμφανής</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Τι προσθέτει η αξιολόγηση</h3>
+      <ul>
+        <li>άμεση εξέταση ανάγνωσης και ορθογραφίας</li>
+        <li>σε εξειδικευμένες δοκιμασίες μπορεί να χρησιμοποιούνται ψευδολέξεις</li>
+        <li>η πορεία της επίδοσης μετά από κατάλληλη διδασκαλία προσθέτει σημαντική πληροφορία</li>
+      </ul>
+    </div>
+  </div>
+  <div class="key"><strong>Ερμηνευτικό κλειδί</strong><br>Η αρχική σχολική εικόνα μεταβάλλεται καθώς αυξάνονται η διδασκαλία και η αναγνωστική εμπειρία. Η σχετική βαρύτητα της ακρίβειας, της ταχύτητας και της ορθογραφίας μπορεί να αλλάζει.</div>
+</div>
+
+<div id="p2" class="phase panel" role="tabpanel">
+  <h2>Μεγαλύτερες τάξεις και εφηβεία</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Τι μπορεί να συνεχίζεται</h3>
+      <ul>
+        <li>βραδεία ή κοπιώδης ανάγνωση</li>
+        <li>αστάθεια στην ορθογραφία</li>
+        <li>αυξημένος χρόνος για απαιτητικές εργασίες γραμματισμού</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Τι μπορεί να έχει βελτιωθεί</h3>
+      <ul>
+        <li>η αναγνωστική ακρίβεια</li>
+        <li>η κατανόηση γνωστών ή καλά υποστηριζόμενων κειμένων</li>
+        <li>η λειτουργικότητα μέσα από στρατηγικές</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Τι μπορεί να κάνει τη δυσκολία πιο εμφανή</h3>
+      <ul>
+        <li>μεγαλύτερος όγκος κειμένου</li>
+        <li>χρονική πίεση</li>
+        <li>εξειδικευμένο λεξιλόγιο και αυξημένες απαιτήσεις γραπτής παραγωγής</li>
+      </ul>
+    </div>
+  </div>
+  <div class="key"><strong>Ερμηνευτικό κλειδί</strong><br>Καθώς αλλάζουν οι απαιτήσεις, αλλάζει και ο τρόπος με τον οποίο γίνεται ορατή η δυσκολία. Η σημερινή επίδοση χρειάζεται να ερμηνεύεται σε σχέση με την αναπτυξιακή πορεία και το εκπαιδευτικό πλαίσιο.</div>
+</div>
+
+<div id="p3" class="phase panel" role="tabpanel">
+  <h2>Ενήλικη ζωή</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Τι μπορεί να συνεχίζεται</h3>
+      <ul>
+        <li>διαφορές στην ταχύτητα ανάγνωσης</li>
+        <li>δυσκολίες σε βασικές δεξιότητες ανάγνωσης και ορθογραφίας</li>
+        <li>μεγαλύτερη προσπάθεια σε πυκνές απαιτήσεις γραμματισμού</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Τι μπορεί να υποστηρίζει την απόδοση</h3>
+      <ul>
+        <li>γνώση του θέματος και στρατηγικές κατανόησης</li>
+        <li>οργάνωση της εργασίας</li>
+        <li>χρήση υποστηρικτικών πόρων και τεχνολογικών εργαλείων</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Πώς ερμηνεύεται η αντιστάθμιση</h3>
+      <ul>
+        <li>η λειτουργική επίδοση μπορεί να βελτιώνεται ενώ βασικές δυσκολίες συνεχίζονται</li>
+        <li>η αντιστάθμιση δεν αποτελεί ξεχωριστό «τύπο δυσλεξίας»</li>
+        <li>παρόμοια εξωτερική επίδοση μπορεί να απαιτεί διαφορετικό χρόνο, προσπάθεια ή υποστήριξη</li>
+      </ul>
+    </div>
+  </div>
+  <div class="key"><strong>Ερμηνευτικό κλειδί</strong><br>Η αντιστάθμιση περιγράφει έναν πιθανό τρόπο με τον οποίο το άτομο ανταποκρίνεται στις απαιτήσεις αξιοποιώντας εμπειρία, στρατηγικές και διαθέσιμους πόρους.</div>
+</div>
+
+<div class="panel">
+  <h2>Δες την πορεία μέσα από δύο φακούς</h2>
+  <div class="toggle">
+    <button class="active" data-lens="stable">Τι μπορεί να συνεχίζεται</button>
+    <button data-lens="change">Τι μπορεί να μεταβάλλεται</button>
+  </div>
+  <div id="stable" class="lens active">
+    <ul>
+      <li>οι δυσκολίες στην αποτελεσματική ανάγνωση λέξεων και ή στην ορθογραφία</li>
+      <li>η ανάγκη μεγαλύτερου χρόνου ή προσπάθειας σε ορισμένες απαιτήσεις</li>
+      <li>η σημασία της αναπτυξιακής ιστορίας για την ερμηνεία της παρούσας επίδοσης</li>
+    </ul>
+  </div>
+  <div id="change" class="lens">
+    <ul>
+      <li>η σχετική βαρύτητα της ακρίβειας, της ταχύτητας και της ορθογραφίας</li>
+      <li>οι στρατηγικές και οι τρόποι αντιστάθμισης</li>
+      <li>η λειτουργική επίδραση ανάλογα με τις απαιτήσεις του περιβάλλοντος</li>
+    </ul>
+  </div>
+</div>
+
+<div class="warning">
+  <strong>Προσοχή</strong><br>
+  Το ΨΜΑ δεν αποτελεί διαγνωστικό κατάλογο χαρακτηριστικών. Οι αναπτυξιακές διαδρομές παρουσιάζουν σημαντική ατομική διαφοροποίηση και η διάγνωση δεν προκύπτει από την απλή αντιστοίχιση ενός ατόμου με μία ηλικιακή λίστα.
+</div>
+
+<footer>
+  <strong>Βιβλιογραφική βάση της σύνθεσης</strong>
+  <ul class="refs">
+    <li>Landerl et al. (2019), διαγλωσσική διαχρονική μελέτη πρώιμων δεικτών και ανάγνωσης.</li>
+    <li>Carioti et al. (2021), μετα-ανάλυση για το ορθογραφικό βάθος και την έκφραση της αναπτυξιακής δυσλεξίας.</li>
+    <li>Reis et al. (2020), μετα-ανάλυση για τη δυσλεξία στην ενήλικη ζωή.</li>
+    <li>Moojen et al. (2020), μελέτη αντιστάθμισης σε ενήλικες υψηλού μορφωτικού επιπέδου.</li>
+  </ul>
+</footer>
+
+</div>
+
+<script>
+const buttons=[...document.querySelectorAll('.phase-btn')];
+buttons.forEach(b=>b.addEventListener('click',()=>{
+  buttons.forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});
+  document.querySelectorAll('.phase').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  b.setAttribute('aria-selected','true');
+  document.getElementById(b.dataset.phase).classList.add('active');
+}));
+
+const lensBtns=[...document.querySelectorAll('.toggle button')];
+lensBtns.forEach(b=>b.addEventListener('click',()=>{
+  lensBtns.forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.lens').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.getElementById(b.dataset.lens).classList.add('active');
+}));
+</script>
+
+</body>
+</html>
