@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ΨΜΑ 1.1 — Η αναπτυξιακή πορεία της δυσλεξίας</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:920px;margin:0 auto;padding:28px;line-height:1.55;background:#fafafa;color:#171717}
+main{background:white;padding:28px;border:1px solid #ddd;border-radius:12px}
+h1{font-size:1.7rem;margin-top:0} h2{margin-top:2rem}.card{border:1px solid #ccc;border-radius:10px;padding:18px;margin:16px 0;background:#fff}
+label{display:block;margin:.5rem 0}.feedback{margin-top:10px;padding:10px;border-radius:8px;background:#f2f2f2}.correct{font-weight:700}.summary{padding:16px;border-left:4px solid #555;background:#f5f5f5}.actions{margin-top:18px}button{font:inherit;padding:10px 14px;border:1px solid #555;border-radius:8px;background:white;cursor:pointer}button:hover{background:#eee}
+</style>
+</head>
+<body><main>
+<h1>ΨΜΑ 1.1 — Η αναπτυξιακή πορεία της δυσλεξίας</h1>
+<p>Στόχος είναι να διακρίνετε την πρώιμη ένδειξη αυξημένου κινδύνου από τη διαγνωστικά τεκμηριωμένη δυσκολία και να αναγνωρίσετε πώς η εικόνα μπορεί να μεταβάλλεται με την ηλικία, τη διδασκαλία και τις στρατηγικές αντιστάθμισης.</p>
+<div id="quiz"></div>
+<div class="actions"><button id="check">Έλεγχος απαντήσεων</button> <button id="reset">Επαναφορά</button></div>
+<div id="score" class="feedback" aria-live="polite"></div>
+<h2>Τι κρατάμε</h2>
+<div class="summary"><ul>
+<li>Οι πρώιμες ενδείξεις αυξάνουν την πιθανότητα μεταγενέστερης δυσκολίας, αλλά δεν αποτελούν πρώιμη διάγνωση.</li>
+<li>Η αναπτυξιακή εικόνα μπορεί να αλλάζει, ενώ οι βασικές δυσκολίες συνεχίζονται στον χρόνο.</li>
+<li>Η βελτίωση της ακρίβειας δεν σημαίνει ότι εξαφανίζονται η βραδύτητα, η ορθογραφική δυσκολία ή το αυξημένο κόστος προσπάθειας.</li>
+<li>Η αντιστάθμιση περιγράφει τον τρόπο με τον οποίο στρατηγικές και διαθέσιμοι πόροι περιορίζουν τη λειτουργική επίδραση της δυσκολίας.</li>
+</ul></div>
+</main>
+<script>
+const items=[
+{q:'Παιδί προσχολικής ηλικίας έχει οικογενειακό ιστορικό δυσλεξίας και δυσκολεύεται σε ορισμένες δραστηριότητες φωνολογικής επίγνωσης.',a:'risk',opts:[['risk','Ένδειξη αυξημένου κινδύνου'],['diag','Διάγνωση δυσλεξίας'],['comp','Αντιστάθμιση']]},
+{q:'Μαθητής Β΄ Δημοτικού διαβάζει λέξεις αργά και με πολλά λάθη, ενώ οι δυσκολίες συνεχίζονται παρά τη συστηματική διδασκαλία και την πρόσθετη υποστήριξη.',a:'dev',opts:[['risk','Μόνο πρώιμη ένδειξη κινδύνου'],['dev','Αναπτυξιακά σημαντική δυσκολία που χρειάζεται διερεύνηση'],['comp','Αντιστάθμιση']]},
+{q:'Μαθήτρια ΣΤ΄ Δημοτικού διαβάζει πλέον με καλή ακρίβεια, αλλά χρειάζεται πολύ περισσότερο χρόνο από τους συνομηλίκους της και εξακολουθεί να έχει σημαντικές ορθογραφικές δυσκολίες.',a:'change',opts:[['change','Μεταβολή της εξωτερικής εικόνας με συνέχιση της δυσκολίας'],['resolved','Η δυσλεξία έχει ξεπεραστεί'],['risk','Μόνο αυξημένος κίνδυνος']]},
+{q:'Φοιτητής χρησιμοποιεί τεχνολογία ανάγνωσης κειμένου, οργανώνει προσεκτικά τον χρόνο του και επιτυγχάνει υψηλή ακαδημαϊκή επίδοση, παρότι η ανάγνωση παραμένει βραδύτερη.',a:'comp',opts:[['comp','Αντιστάθμιση και αποτελεσματική προσαρμογή'],['resolved','Απουσία δυσκολίας'],['diag','Νέα διαγνωστική κατηγορία']]}
+];
+const quiz=document.getElementById('quiz');
+items.forEach((it,i)=>{const d=document.createElement('section');d.className='card';d.innerHTML=`<h2>Περίπτωση ${i+1}</h2><p>${it.q}</p>`+it.opts.map(o=>`<label><input type="radio" name="q${i}" value="${o[0]}"> ${o[1]}</label>`).join('')+`<div id="f${i}" class="feedback" aria-live="polite"></div>`;quiz.appendChild(d)});
+document.getElementById('check').onclick=()=>{let n=0;items.forEach((it,i)=>{const x=document.querySelector(`input[name=q${i}]:checked`);const f=document.getElementById(`f${i}`);if(x&&x.value===it.a){n++;f.textContent='Σωστά.';f.className='feedback correct'}else{f.textContent='Χρειάζεται επανεξέταση με βάση τη διάκριση κινδύνου, αναπτυξιακής πορείας και αντιστάθμισης.';f.className='feedback'}});document.getElementById('score').textContent=`Σωστές απαντήσεις: ${n} / ${items.length}`};
+document.getElementById('reset').onclick=()=>{document.querySelectorAll('input').forEach(x=>x.checked=false);document.querySelectorAll('[id^=f]').forEach(x=>x.textContent='');document.getElementById('score').textContent=''};
+</script></body></html>
